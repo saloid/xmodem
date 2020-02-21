@@ -139,14 +139,14 @@ static bool receiver_write_data(const uint32_t requested_size, uint8_t *buffer, 
 
 void padbuffer(std::vector<char> &buffer_transmit)
 {
-   auto pad = XMODEM_BLOCK_SIZE - (buffer_transmit.size() % XMODEM_BLOCK_SIZE);
+   auto pad = XMODEM_PAYLOAD_SIZE - (buffer_transmit.size() % XMODEM_PAYLOAD_SIZE);
 
    for (uint8_t i = 0; i < pad; ++i)
    {
       buffer_transmit.push_back(0xFF);
    }
 
-   assert(0 == buffer_transmit.size() % XMODEM_BLOCK_SIZE);
+   assert(0 == buffer_transmit.size() % XMODEM_PAYLOAD_SIZE);
 }
 
 void transmit(std::string port_name, std::string baud, std::string file)

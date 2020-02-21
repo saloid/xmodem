@@ -125,14 +125,14 @@ bool xmodem_transmit_process(const uint32_t current_time)
          {
             transmit_state = XMODEM_TRANSMIT_WRITE_BLOCK_TIMEOUT;
          }
-         else //if ((payload_size / XMODEM_BLOCK_SIZE) >= current_packet_id)
+         else //if ((payload_size / XMODEM_PAYLOAD_SIZE) >= current_packet_id)
          {
             /* setup current packet */ 
 	    current_packet.preamble      = SOH;
 	    current_packet.id            = current_packet_id;
 	    current_packet.id_complement = 0xFF - current_packet_id;
-	    memcpy(current_packet.data, payload_buffer+payload_buffer_position, XMODEM_BLOCK_SIZE);
-            xmodem_calculate_crc(current_packet.data, XMODEM_BLOCK_SIZE, &current_packet.crc);      
+	    memcpy(current_packet.data, payload_buffer+payload_buffer_position, XMODEM_PAYLOAD_SIZE);
+            xmodem_calculate_crc(current_packet.data, XMODEM_PAYLOAD_SIZE, &current_packet.crc);      
 
             /* write to output buffer */ 
             callback_write_data(sizeof(current_packet), (uint8_t*)&current_packet, &write_success);  
@@ -141,7 +141,7 @@ bool xmodem_transmit_process(const uint32_t current_time)
             {
 	       /* increment for next packet */
 	       ++current_packet_id;        
-	       payload_buffer_position = payload_buffer_position + XMODEM_BLOCK_SIZE;
+	       payload_buffer_position = payload_buffer_position + XMODEM_PAYLOAD_SIZE;
                transmit_state = XMODEM_TRANSMIT_WAIT_FOR_C_ACK; // end of document
 	    }
 

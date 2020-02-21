@@ -272,7 +272,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT)
   xmodem_transmitter_set_callback_is_outbound_full(&transmitter_is_outbound_full);
   xmodem_transmitter_set_callback_is_inbound_empty(&transmitter_is_inbound_empty);
 
-  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_BLOCK_SIZE)); // send only a single block
+  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_PAYLOAD_SIZE)); // send only a single block
   EXPECT_EQ(XMODEM_TRANSMIT_INITIAL, xmodem_transmit_state());
 
   for (int i = 0; i < 20; ++i)
@@ -301,7 +301,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT)
   EXPECT_EQ(transmitter_outbound_buffer[0], SOH);
   EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
-  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_BLOCK_SIZE));
+  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_PAYLOAD_SIZE));
 
   EXPECT_EQ(true, xmodem_transmit_process(transmitter_timer));
   EXPECT_EQ(XMODEM_TRANSMIT_WAIT_FOR_C_ACK, xmodem_transmit_state());
@@ -367,7 +367,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_ETB_NACK)
   xmodem_transmitter_set_callback_is_outbound_full(&transmitter_is_outbound_full);
   xmodem_transmitter_set_callback_is_inbound_empty(&transmitter_is_inbound_empty);
 
-  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_BLOCK_SIZE)); // send only a single block
+  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_PAYLOAD_SIZE)); // send only a single block
   EXPECT_EQ(XMODEM_TRANSMIT_INITIAL, xmodem_transmit_state());
 
   for (int i = 0; i < 20; ++i)
@@ -396,7 +396,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_ETB_NACK)
   EXPECT_EQ(transmitter_outbound_buffer[0], SOH);
   EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
-  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_BLOCK_SIZE));
+  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_PAYLOAD_SIZE));
 
   EXPECT_EQ(true, xmodem_transmit_process(transmitter_timer));
   EXPECT_EQ(XMODEM_TRANSMIT_WAIT_FOR_C_ACK, xmodem_transmit_state());
@@ -463,7 +463,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_ETB_MAX_RETRIES)
   xmodem_transmitter_set_callback_is_outbound_full(&transmitter_is_outbound_full);
   xmodem_transmitter_set_callback_is_inbound_empty(&transmitter_is_inbound_empty);
 
-  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_BLOCK_SIZE)); // send only a single block
+  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_PAYLOAD_SIZE)); // send only a single block
   EXPECT_EQ(XMODEM_TRANSMIT_INITIAL, xmodem_transmit_state());
 
   for (int i = 0; i < 20; ++i)
@@ -492,7 +492,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_ETB_MAX_RETRIES)
   EXPECT_EQ(transmitter_outbound_buffer[0], SOH);
   EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
-  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_BLOCK_SIZE));
+  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_PAYLOAD_SIZE));
 
   EXPECT_EQ(true, xmodem_transmit_process(transmitter_timer));
   EXPECT_EQ(XMODEM_TRANSMIT_WAIT_FOR_C_ACK, xmodem_transmit_state());
@@ -597,7 +597,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_NACK_EOT)
   xmodem_transmitter_set_callback_is_outbound_full(&transmitter_is_outbound_full);
   xmodem_transmitter_set_callback_is_inbound_empty(&transmitter_is_inbound_empty);
 
-  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_BLOCK_SIZE)); // send only a single block
+  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_PAYLOAD_SIZE)); // send only a single block
   EXPECT_EQ(XMODEM_TRANSMIT_INITIAL, xmodem_transmit_state());
 
   for (int i = 0; i < 20; ++i)
@@ -626,7 +626,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_NACK_EOT)
   EXPECT_EQ(transmitter_outbound_buffer[0], SOH);
   EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
-  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_BLOCK_SIZE));
+  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_PAYLOAD_SIZE));
 
   EXPECT_EQ(true, xmodem_transmit_process(transmitter_timer));
   EXPECT_EQ(XMODEM_TRANSMIT_WAIT_FOR_C_ACK, xmodem_transmit_state());
@@ -646,7 +646,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_REINIT)
   xmodem_transmitter_set_callback_is_outbound_full(&transmitter_is_outbound_full);
   xmodem_transmitter_set_callback_is_inbound_empty(&transmitter_is_inbound_empty);
 
-  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_BLOCK_SIZE)); // send only a single block
+  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_PAYLOAD_SIZE)); // send only a single block
   EXPECT_EQ(XMODEM_TRANSMIT_INITIAL, xmodem_transmit_state());
 
   xmodem_transmitter_cleanup();  
@@ -668,7 +668,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_EOT_TIMEOUT)
   xmodem_transmitter_set_callback_is_outbound_full(&transmitter_is_outbound_full);
   xmodem_transmitter_set_callback_is_inbound_empty(&transmitter_is_inbound_empty);
 
-  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_BLOCK_SIZE)); // send only a single block
+  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_PAYLOAD_SIZE)); // send only a single block
   EXPECT_EQ(XMODEM_TRANSMIT_INITIAL, xmodem_transmit_state());
 
   for (int i = 0; i < 20; ++i)
@@ -698,7 +698,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_EOT_TIMEOUT)
   EXPECT_EQ(transmitter_outbound_buffer[0], SOH);
   EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
-  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_BLOCK_SIZE));
+  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_PAYLOAD_SIZE));
 
   EXPECT_EQ(true, xmodem_transmit_process(transmitter_timer));
   EXPECT_EQ(XMODEM_TRANSMIT_WAIT_FOR_C_ACK, xmodem_transmit_state());
@@ -765,7 +765,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_EOT_NACK)
   xmodem_transmitter_set_callback_is_outbound_full(&transmitter_is_outbound_full);
   xmodem_transmitter_set_callback_is_inbound_empty(&transmitter_is_inbound_empty);
 
-  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_BLOCK_SIZE)); // send only a single block
+  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, XMODEM_PAYLOAD_SIZE)); // send only a single block
   EXPECT_EQ(XMODEM_TRANSMIT_INITIAL, xmodem_transmit_state());
 
   for (int i = 0; i < 20; ++i)
@@ -795,7 +795,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_SINGLE_BLOCK_DOCUMENT_EOT_NACK)
   EXPECT_EQ(transmitter_outbound_buffer[0], SOH);
   EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
-  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_BLOCK_SIZE));
+  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_PAYLOAD_SIZE));
 
   EXPECT_EQ(true, xmodem_transmit_process(transmitter_timer));
   EXPECT_EQ(XMODEM_TRANSMIT_WAIT_FOR_C_ACK, xmodem_transmit_state());
@@ -899,7 +899,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_DOCUMENT)
  //    EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   //   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
 //     EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, 1));
-     transmitter_buffer_position = transmitter_buffer_position + XMODEM_BLOCK_SIZE;
+     transmitter_buffer_position = transmitter_buffer_position + XMODEM_PAYLOAD_SIZE;
 
      // clear outbound buffer on each iteration
      memset(transmitter_outbound_buffer, 0, OUTBOUND_BUFFER_SIZE);
@@ -1064,7 +1064,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_2_BLOCK_DOCUMENT)
   xmodem_transmitter_set_callback_is_outbound_full(&transmitter_is_outbound_full);
   xmodem_transmitter_set_callback_is_inbound_empty(&transmitter_is_inbound_empty);
 
-  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, 2*XMODEM_BLOCK_SIZE)); // send only a single block
+  EXPECT_EQ(true, xmodem_transmit_init(transmitter_buffer, 2*XMODEM_PAYLOAD_SIZE)); // send only a single block
   EXPECT_EQ(XMODEM_TRANSMIT_INITIAL, xmodem_transmit_state());
 
   for (int i = 0; i < 20; ++i)
@@ -1094,7 +1094,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_2_BLOCK_DOCUMENT)
   EXPECT_EQ(transmitter_outbound_buffer[0], SOH);
   EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
-  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_BLOCK_SIZE));
+  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_PAYLOAD_SIZE));
 
   // clear outbound buffer
   memset(transmitter_outbound_buffer, 0, OUTBOUND_BUFFER_SIZE);
@@ -1107,7 +1107,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_2_BLOCK_DOCUMENT)
   EXPECT_EQ(transmitter_outbound_buffer[0], SOH);
   EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
-  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_BLOCK_SIZE));
+  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_PAYLOAD_SIZE));
 
   // clear outbound buffer
   memset(transmitter_outbound_buffer, 0, OUTBOUND_BUFFER_SIZE);
@@ -1125,7 +1125,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_2_BLOCK_DOCUMENT)
 
   // write second block of data
   ++transmitter_packet_number;
-  transmitter_buffer_position = transmitter_buffer_position + XMODEM_BLOCK_SIZE;
+  transmitter_buffer_position = transmitter_buffer_position + XMODEM_PAYLOAD_SIZE;
   EXPECT_EQ(XMODEM_TRANSMIT_WRITE_BLOCK, xmodem_transmit_state());
   EXPECT_EQ(true, xmodem_transmit_process(transmitter_timer));
 
@@ -1133,7 +1133,7 @@ TEST_F(XModemTests, XMODEM_TRANSMIT_WRITE_2_BLOCK_DOCUMENT)
   EXPECT_EQ(transmitter_outbound_buffer[0], SOH);
   EXPECT_EQ(transmitter_outbound_buffer[1], transmitter_packet_number);
   EXPECT_EQ(transmitter_outbound_buffer[2], 0xFF - transmitter_packet_number);
-  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_BLOCK_SIZE));
+  EXPECT_EQ(0, memcmp(transmitter_outbound_buffer+3, transmitter_buffer+transmitter_buffer_position, XMODEM_PAYLOAD_SIZE));
 
   ++transmitter_timer;
   transmitter_inbound_buffer[0] = 0;
@@ -1302,7 +1302,7 @@ TEST_F(XModemTests, XMODEM_RECEIVE_BLOCK_ACK)
   receiver_returned_inbound_size = sizeof(xmodem_packet_t);
 
   xmodem_packet_t *packet = (xmodem_packet_t *)receiver_inbound_buffer;
-  xmodem_calculate_crc(packet->data, XMODEM_BLOCK_SIZE, &packet->crc);
+  xmodem_calculate_crc(packet->data, XMODEM_PAYLOAD_SIZE, &packet->crc);
   
   EXPECT_EQ(true, xmodem_receive_process(4));
   EXPECT_EQ(XMODEM_RECEIVE_READ_BLOCK_SUCCESS, xmodem_receive_state());
